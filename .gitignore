@@ -1,0 +1,51 @@
+# Entornos virtuales
+.venv/
+venv/
+env/
+
+# uv
+uv.lock
+
+# Archivos Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.ipynb_checkpoints
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Reportes generados (¡NO commitear!)
+*.html
+*.md
+reportes/
+reports/
+escaneos/
+*.json
+
+# Secretos y configuraciones sensibles
+.env
+.env.local
+.env.*.local
+config.ini
+secrets.yaml
+secrets.json
+api_keys.txt
+
+# Logs y temporales
+*.log
+logs/
+tmp/
+temp/
+
+# Build / Distribución
+build/
+dist/
+*.egg-info/
