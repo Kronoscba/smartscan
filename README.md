@@ -1,4 +1,4 @@
-🔍 SmartScan
+# 🔍 SmartScan
 
 > **Escáner inteligente de reconocimiento ético**\
 > Descubre puertos abiertos, subdominios, rutas sensibles, CVEs, huellas web y
