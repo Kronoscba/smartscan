@@ -13,6 +13,11 @@ __pycache__/
 *.pyd
 .Python
 .ipynb_checkpoints
+.mypy_cache/
+.pytest_cache/
+*.egg
+*.whl
+MANIFEST
 
 # Archivos del sistema
 .DS_Store
