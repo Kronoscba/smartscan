@@ -38,7 +38,7 @@ def _summary(result: dict) -> dict:
 
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse(request, "index.html", {"request": request})
 
 
 @app.post("/scan", response_class=HTMLResponse)
@@ -88,8 +88,8 @@ async def start_scan(
             scan_state[scan_id] = {"progress": 0, "step": str(e), "status": "error", "error": str(e)}
 
     asyncio.create_task(task())
-    return templates.TemplateResponse("progress.html", {
-        "request": request, "scan_id": scan_id, "progress": 0, "step": "Encolado...",
+    return templates.TemplateResponse(request, "progress.html", {
+        "scan_id": scan_id, "progress": 0, "step": "Encolado...",
     })
 
 
@@ -99,21 +99,20 @@ async def scan_status(request: Request, scan_id: str):
     if state is None:
         result = load_scan(scan_id, SCANS_DIR)
         if result:
-            return templates.TemplateResponse("results.html", {
-                "request": request, "result": result, "summary": _summary(result),
+            return templates.TemplateResponse(request, "results.html", {
+                "result": result, "summary": _summary(result),
             })
         return HTMLResponse('<div class="error">Escaneo no encontrado</div>')
 
     if state["status"] == "done":
-        return templates.TemplateResponse("results.html", {
-            "request": request, "result": state["result"], "summary": _summary(state["result"]),
+        return templates.TemplateResponse(request, "results.html", {
+            "result": state["result"], "summary": _summary(state["result"]),
         })
     if state["status"] == "error":
         return HTMLResponse(f'<div class="error">Error: {state.get("error", "desconocido")}</div>')
 
-    return templates.TemplateResponse("progress.html", {
-        "request": request, "scan_id": scan_id,
-        "progress": state["progress"], "step": state["step"],
+    return templates.TemplateResponse(request, "progress.html", {
+        "scan_id": scan_id, "progress": state["progress"], "step": state["step"],
     })
 
 
@@ -122,16 +121,16 @@ async def view_scan(request: Request, scan_id: str):
     result = load_scan(scan_id, SCANS_DIR)
     if not result:
         raise HTTPException(404, "Escaneo no encontrado")
-    return templates.TemplateResponse("results.html", {
-        "request": request, "result": result, "summary": _summary(result),
+    return templates.TemplateResponse(request, "results.html", {
+        "result": result, "summary": _summary(result),
     })
 
 
 @app.get("/history", response_class=HTMLResponse)
 async def history(request: Request):
     scans = list_scans_scans_dir(SCANS_DIR)
-    return templates.TemplateResponse("history.html", {
-        "request": request, "scans": scans,
+    return templates.TemplateResponse(request, "history.html", {
+        "scans": scans,
     })
 
 
