@@ -26,7 +26,6 @@ Thumbs.db
 # Reportes generados (¡NO commitear!)
 *.html
 *.md
-!tasks/*.md
 reportes/
 reports/
 escaneos/
