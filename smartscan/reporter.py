@@ -198,6 +198,10 @@ def generate_markdown_report(data: dict, output_file: str):
         techs = ", ".join(web_info.get("technologies", [])) or "N/A"
         lines.append(f"- **Tecnologías**: {techs}")
         lines.append(f"- **WAF**: `{web_info.get('waf', 'N/A')}`")
+        if web_info.get("security_headers"):
+            lines.append(f"- **🛡️ Security Headers**:")
+            for h, v in web_info["security_headers"].items():
+                lines.append(f"  - `{escape_md(h)}`: {escape_md(v)}")
         lines.append("")
 
     # Riesgos

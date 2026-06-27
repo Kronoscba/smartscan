@@ -19,6 +19,7 @@ __pycache__/
 Thumbs.db
 .vscode/
 .idea/
+.obsidian/
 *.swp
 *.swo
 

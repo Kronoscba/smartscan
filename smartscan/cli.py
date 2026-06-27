@@ -63,7 +63,7 @@ async def main():
         print("-" * 70)
 
     # Escaneo principal
-    open_ports = await scan_ports(ip, ports, args.timeout, args.json)
+    open_ports = await scan_ports(ip, ports, args.timeout, args.json, stealth=args.stealth)
 
     # Análisis web (si hay puertos 80/443 abiertos)
     web_info = None
@@ -130,6 +130,8 @@ async def main():
                 print(f"  🌐 Server: {web_info['server']}")
             if web_info.get("risks"):
                 print(f"  ⚠️  Riesgos: {', '.join(web_info['risks'])}")
+            if web_info.get("security_headers"):
+                print(f"  🛡️  Security Headers: {len(web_info['security_headers'])} presentes")
             if discovered_paths:
                 print(f"  📁 Rutas encontradas: {len(discovered_paths)}")
     # Generar reportes
